@@ -6,20 +6,22 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: function(){
     return {  
-      movies:[{
-        id: 0,
-        nameMovie: 100,
-        descriptionMovie: 1000,
-      },]
+      movies:[],
+      options: ["Action","Comedy","Drama","Fantasy","Horror","Mystery","Romance","Thriller"],
     }
   },
+  
   mutations: {
-    increment (state) {
+    increment (state, movie) {
+      let {nameMovie, descriptionMovie, genreMovie, posterMovie, movieMovie} = movie
       state.movies.push({
-        id: state.movies[state.movies.length - 1].id+1,
-        nameMovie: state.movies[state.movies.length - 1].nameMovie+1,
-        descriptionMovie: state.movies[state.movies.length - 1].descriptionMovie+1,
-      })  
+        id: state.movies.length ? (state.movies[state.movies.length - 1].id+1) : 0,
+        nameMovie,
+        descriptionMovie,
+        genreMovie,
+        posterMovie,
+        movieMovie,
+      })
     },
   },
   strict: true,
