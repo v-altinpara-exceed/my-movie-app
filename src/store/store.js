@@ -23,6 +23,17 @@ export default new Vuex.Store({
         movieMovie,
       })
     },
+
+    redactMovie(state, movie){
+      const namMovie=state.movies.findIndex(item => item.id === movie.id)  
+      
+      state.movies.push(movie)
+      console.log(state.movies[namMovie])
+    },
+
+    deleteMovie(state, movies){
+      state.movies= movies
+    }
   },
   strict: true,
 })   

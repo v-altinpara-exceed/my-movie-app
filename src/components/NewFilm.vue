@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div style="text-align: start;">
     <div v-show="!movieCreationWindow">
       <button v-on:click='()=>this.movieCreationWindow = true'>Add movie</button>
     </div>
     <div v-show="movieCreationWindow">
-      <form v-on:submit.prevent='addMovie'> 
+      <form class="createMovie" v-on:submit.prevent='addMovie'> 
         <input  
           v-model='movie.nameMovie'
           type="text"
@@ -15,29 +15,27 @@
           type="text"
           placeholder='descriptionMovie'
         >
-
+  
+        <p>
+          ADD genre:
+          <select v-model="movie.genreMovie" > 
+            <option v-for="(option, key) in options" v-bind:key="key" v-bind:value="option">
+              {{ option }}
+            </option>
+          </select>
+        </p>
         <input type="file" accept="image/jpeg" @change=uploadImage>
-
         
-        <input type="file" accept="image/mp4" @change=uploadVideo>
-
-        <select v-model="movie.genreMovie">
-          <option v-for="(option, key) in options" v-bind:key="key" v-bind:value="option">
-            {{ option }}
-          </option>
-        </select>
-          
+        <input type="file" accept="video/mp4" @change=uploadVideo>
         <button>OK</button>
       </form>
       <button v-on:click='close'>Close</button> 
     </div>
-    <Magazines/>
   </div>
 </template>
 
 <script>
 
-import Magazines from './Magazines'
 import store from '../store/store'
 
 export default {
@@ -57,10 +55,6 @@ export default {
   },
 
   store:store,
-
-  components:{
-    Magazines,
-  },
 
   methods:{
     addMovie(){
@@ -103,5 +97,9 @@ export default {
 </script>
 
 <style>
-
+  .createMovie{
+    height: 178px;
+    display: table-caption;
+    text-align: start;
+  }
 </style>

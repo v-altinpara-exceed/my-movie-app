@@ -1,39 +1,24 @@
 <template>
-  <v-app> 
-    <form v-on:submit.prevent='scanMovies'>
-      <input
-        v-model='scanMovie'
-        id='scan-movie'
-        placeholder='Scan movie'
-      >
-      <button>scan</button>
-    </form>
+  <v-app>
+    <Scan/>
     <NewFilm/>
+    <Magazines/>
   </v-app>
 </template>
 
 <script>
 
 import NewFilm from './components/NewFilm'
+import Scan from './components/Scan'
+import Magazines from './components/Magazines'
 
 export default {
   name: 'App',
-  
-  data:function(){
-    return {
-      scanMovie: '',
-    }
-  },
 
   components: {
-    NewFilm
-  },
-
-  methods:{   
-    scanMovies(){
-      console.log(this.scanMovie)
-      this.scanMovie=''
-    },  
+    NewFilm,
+    Scan,
+    Magazines,
   },
 };
 </script>
