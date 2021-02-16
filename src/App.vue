@@ -1,25 +1,13 @@
 <template>
   <v-app>
-    <Scan/>
-    <NewFilm/>
-    <Magazines/>
+    <router-view/>
   </v-app>
 </template>
 
 <script>
-
-import NewFilm from './components/NewFilm'
-import Scan from './components/Scan'
-import Magazines from './components/Magazines'
-
 export default {
+  
   name: 'App',
-
-  components: {
-    NewFilm,
-    Scan,
-    Magazines,
-  },
 };
 </script>
 

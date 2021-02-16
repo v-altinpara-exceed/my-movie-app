@@ -3,12 +3,15 @@
         <div class='content' v-show="!isEditing">
             <div class="poster" :style="{'background-image': 'url(' +movie.posterMovie + ')'}">
                 <button class="redactMovie" v-on:click="redactMovie">...</button>
-                <span class="deleteMovie" v-on:click="$emit('delete-movie', movie.id)">X</span>
-                <a href="#">
-                    <span class="circle">
-                        <span class="triangle"></span>
-                    </span>
-                </a>
+                <span type="button" class="deleteMovie" v-on:click="$emit('delete-movie', movie.id)">X</span>
+                <div id="nav" >
+                    <router-link :to="{name: 'Film', query : { movie }}" >
+                        <span class="circle">
+                            <span class="triangle"></span>
+                        </span>
+                    </router-link>
+                </div>
+            
             </div>
             <h3>{{movie.nameMovie}}</h3>
         </div>
@@ -40,6 +43,7 @@
             </form>
             <button v-on:click='close'>Close</button>
         </div>
+
     </div>  
 </template>
     
@@ -47,9 +51,10 @@
 
 import store from '../store/store'
 
+
 export default {
     props:['movie'],
-    store:store,
+    store:store,    
 
     data: function(){
         return {
@@ -62,6 +67,7 @@ export default {
     methods:{
         redactMovie() {
             this.isEditing = true;
+            this.movies.id=this.movie.id
             this.movies.nameMovie=this.movie.nameMovie
             this.movies.descriptionMovie=this.movie.descriptionMovie
             this.movies.genreMovie=this.movie.genreMovie
@@ -86,6 +92,10 @@ export default {
             reader.onload = e =>{
                 this.movies.movieMovie = e.target.result;
             };
+        },
+        startMovie(){
+            store.commit('startMovie',this.movie.id)
+            console.log('1 '+ store.state.movieID)
         },
     },
 }
@@ -119,14 +129,14 @@ export default {
         float: left;
     }
 
-    a{
+    #nav{
         height: 10em;
         display: flex;
         align-items: center;
         justify-content: center
     }
 
-    a .circle { 
+    #nav .circle { 
         display: inline-block;
         border: transparent;
         border-radius: 25px;
@@ -134,7 +144,7 @@ export default {
         height: 10px;
         width: 10px;
     }
-    a .circle .triangle {
+    #nav .circle .triangle {
         display: inline-block;
         width: 0;
         height: 0;
@@ -144,12 +154,12 @@ export default {
         transform: translate(-25%, -50%);
     }
 
-    a:hover .circle {
+    #nav:hover .circle {
         border: 3px solid white;
         transition: 0.3s;
     }
 
-    a:hover .triangle {
+    #nav:hover .triangle {
         border-left: 10px solid white;
         transition: 0.3s;
     }

@@ -1,23 +1,28 @@
 <template>
+
     <div class="container">
         <div 
+            @mousedown="()=>(mouseDownMovie=true)"
+            @mouseup="()=>(mouseDownMovie=false)"
+            @mousemove="(el)=>mouseMove(el.clientX,el.clientY)"
             class="row"
-            v-for="(option, key) in options"    
-            v-bind:key="key"
+            v-for="option in options.filter(e=>moviegenre(e))"    
+            v-bind:key="option"
         >
     
-            <div class="mt-2 col col-12" v-if="moviegenre(option)" >{{option}}</div>
+            <div class="mt-2 col col-12">{{option}}</div>
             <Genres
-                v-for="(movie, key) in movies.filter(t=> t.genreMovie === option)"
-                v-bind:key="key" 
-                v-bind:option="option"
-                v-bind:movie="movie"
+                v-for='(movie, key) in movies.filter(t=> t.genreMovie === option)'
+                v-bind:key='key' 
+                v-bind:option='option'
+                v-bind:movie='movie'
                 @delete-movie='deleteMovie'
                 @redact-movie='redactMovie'
             />
+            <hr align='center' width='95%' size='2' color='#2c3e50' />
         </div> 
     </div>
-</template>
+</template> 
 
 <script>
 import store from '../store/store'
@@ -29,13 +34,14 @@ export default {
         
     store:store,
     components:{
-        Genres
+        Genres,
     },
 
     data: function(){
         return{
             movies:store.state.movies,
             options:store.state.options,
+            mouseDownMovie: false,
         }
     },
     methods:{
@@ -49,7 +55,10 @@ export default {
         },
         redactMovie(movie){
             store.commit('redactMovie',movie)
-        }
+        },    
+        mouseMove(clientX,clientY){
+            if(this.mouseDownMovie) {console.log(clientX+':'+clientY)}
+        }    
     }
 }
 </script>
@@ -65,7 +74,6 @@ export default {
         display: flex;
         flex-wrap: wrap;
         flex: 1 1 auto;
-        margin: -12px;
     }
     .v-application .mt-2 {
         margin-top: 8px!important;
@@ -73,5 +81,6 @@ export default {
     .col-12 {
         flex: 0 0 100%;
         max-width: 100%;
+        font-size: 20pt
     }
 </style>

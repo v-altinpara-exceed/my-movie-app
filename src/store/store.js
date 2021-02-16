@@ -7,6 +7,8 @@ export default new Vuex.Store({
   state: function(){
     return {  
       movies:[],
+      movieID:0,
+      movieIDFlag:true,
       options: ["Action","Comedy","Drama","Fantasy","Horror","Mystery","Romance","Thriller"],
     }
   },
@@ -23,12 +25,19 @@ export default new Vuex.Store({
         movieMovie,
       })
     },
+    startMovie(state, id){
+      state.movieID=id
+      state.movieIDFlag=false
+    },
 
     redactMovie(state, movie){
       const namMovie=state.movies.findIndex(item => item.id === movie.id)  
       
-      state.movies.push(movie)
-      console.log(state.movies[namMovie])
+      state.movies[namMovie].nameMovie=movie.nameMovie
+      state.movies[namMovie].descriptionMovie=movie.descriptionMovie
+      state.movies[namMovie].genreMovie=movie.genreMovie
+      state.movies[namMovie].posterMovie=movie.posterMovie
+      state.movies[namMovie].movieMovie=movie.movieMovie
     },
 
     deleteMovie(state, movies){
