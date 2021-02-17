@@ -4,27 +4,50 @@
       v-for="option in options.filter(e => moviegenre(e))"
       :key="option"
       class="row"
-      @mousedown="() => (mouseDownMovie=true)"
-      @mouseup="() => (mouseDownMovie=false)"
-      @mousemove="(el) => mouseMove(el.clientX,el.clientY)"
     >
-      <div class="mt-2 col col-12">
-        {{ option }}
-      </div>
-      <Genres
-        v-for="(movie, key) in movies.filter(t => t.genreMovie === option)"
-        :key="key"
-        :option="option"
-        :movie="movie"
-        @delete-movie="deleteMovie"
-        @redact-movie="redactMovie"
-      />
-      <hr
-        align="center"
-        width="95%"
-        size="2"
-        color="#2c3e50"
+      <v-sheet
+        class="mx-auto"
+        elevation="8"
+        width="90%"
+        draggable
       >
+        <i class="fa fa-chevron-up" />
+        <v-btn
+          color="primary"
+          text
+          @click="$emit('up', option)"
+        >
+          UP
+        </v-btn>
+        <v-btn
+          color="primary"
+          text
+          @click="DOWN(option)"
+        >
+          DOWN
+        </v-btn>
+        <div class="mt-2 col col-12">
+          {{ option }}
+        </div>
+
+        <v-slide-group
+          class="pa-4"
+          active-class="success"
+          show-arrows
+        >
+          <v-slide-item
+            v-for="(movie, key) in movies.filter(t => t.genreMovie === option)"
+            :key="key"
+          >
+            <Genres
+              :option="option"
+              :movie="movie"
+              @delete-movie="deleteMovie"
+              @redact-movie="redactMovie"
+            />
+          </v-slide-item>
+        </v-slide-group>
+      </v-sheet>
     </div>
   </div>
 </template>
@@ -46,6 +69,8 @@ export default {
       movies: store.state.movies,
       options: store.state.options,
       mouseDownMovie: false,
+      dragEvent: null,
+      extendOriginal: null,
     };
   },
   methods: {
@@ -59,11 +84,6 @@ export default {
     },
     redactMovie(movie) {
       store.commit('redactMovie', movie);
-    },
-    mouseMove(clientX, clientY) {
-      if (this.mouseDownMovie) {
-        console.log(`${clientX}:${clientY}`);
-      }
     },
   },
 };

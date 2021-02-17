@@ -6,7 +6,7 @@
     >
       <div
         class="poster"
-        :style="{'background-image': 'url(' +movie.posterMovie + ')'}"
+        :style="{'background': 'no-repeat center url(' +movie.posterMovie + ')' }"
       >
         <button
           class="redactMovie"
@@ -76,17 +76,22 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .col-md-2 {
-    flex: 0 0 16.6666666667%;
-    max-width: 16.6666666667%;
-    margin: 10px 10px 0 10px;
+  flex: 0 0 16.6666666667%;
+  max-width: 300px;
+  margin: 10px 10px 0 10px;
+  height: 400px;
 }
 
 .poster {
-    height: 150px;
-    background-size: cover;
-
+  height: 300px;
+  background-size: cover;
+  margin-bottom: 20px;
+}
+.content{
+  height: 420px;
+  width: 300px;
 }
 
 .deleteMovie {
@@ -107,7 +112,7 @@ export default {
 }
 
 #nav {
-    height: 10em;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center

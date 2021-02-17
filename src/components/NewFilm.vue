@@ -1,18 +1,24 @@
 <template>
   <div style="text-align: start;">
     <div v-show="!movieCreationWindow">
-      <button @click="() => movieCreationWindow = true">
+      <v-btn
+        text
+        @click="() => movieCreationWindow = true"
+      >
         Add movie
-      </button>
+      </v-btn>
     </div>
     <div v-show="movieCreationWindow">
       <CreateRedactMovie
         :movie="movie"
         @redact-movie="redactMovie"
       />
-      <button @click="close">
+      <v-btn
+        text
+        @click="close"
+      >
         Close
-      </button>
+      </v-btn>
     </div>
   </div>
 </template>
@@ -65,9 +71,4 @@ export default {
 </script>
 
 <style>
-.createMovie {
-    height: 178px;
-    display: table-caption;
-    text-align: start;
-}
 </style>

@@ -1,45 +1,58 @@
 <template>
   <div>
-    <form
-      class="createMovie"
-      @submit.prevent="$emit('redact-movie', movies)"
+    <v-col
+      cols="12"
+      sm="10"
+      md="8"
+      lg="6"
     >
-      <input
-        v-model="movies.nameMovie"
-        type="text"
-        placeholder="nameMovie"
+      <v-card
+        ref="form"
+        class="createMovie"
       >
-      <input
-        v-model="movies.descriptionMovie"
-        type="text"
-        placeholder="descriptionMovie"
-      >
-      <p>
-        ADD genre:
-        <select v-model="movies.genreMovie">
-          <option
-            v-for="(option, key) in options"
-            :key="key"
-            :value="option"
+        <v-card-text
+          style="padding-bottom: 0px;"
+        >
+          <v-text-field
+            v-model="movies.nameMovie"
+            label="Name movie"
+            hide-details="auto"
+          />
+          <v-text-field
+            v-model="movies.descriptionMovie"
+            label="Description movie"
+            hide-details="auto"
+          />
+          <v-select
+            v-model="movies.genreMovie"
+            :items="options"
+            color="pink"
+            label="Genre movie"
+            required
+          />
+          <input
+            type="file"
+            accept="image/jpeg"
+            @change="uploadImage"
           >
-            {{ option }}
-          </option>
-        </select>
-      </p>
-      <input
-        type="file"
-        accept="image/jpeg"
-        @change="uploadImage"
-      >
-      <input
-        type="file"
-        accept="video/mp4"
-        @change="uploadVideo"
-      >
-      <button>
-        OK
-      </button>
-    </form>
+          <input
+            type="file"
+            accept="video/mp4"
+            @change="uploadVideo"
+          >
+        </v-card-text>
+        <v-divider class="mt-12" />
+        <v-card-actions>
+          <v-btn
+            color="primary"
+            text
+            @click="$emit('redact-movie', movies)"
+          >
+            OK
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-col>
   </div>
 </template>
 
@@ -90,5 +103,10 @@ export default {
 </script>
 
 <style>
-
+  .createMovie {
+    height: 340px;
+    width: 300px;
+    display: table-caption;
+    text-align: start;
+  }
 </style>
