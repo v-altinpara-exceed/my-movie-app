@@ -1,19 +1,18 @@
 <template>
-    <div  >
-      <Scan/>
-      <NewFilm/>
-      <Magazines/>
-    </div>
+  <div>
+    <Scan />
+    <NewFilm />
+    <Magazines />
+  </div>
 </template>
 
 <script>
-
-import NewFilm from './NewFilm'
-import Scan from './Scan'
-import Magazines from './Magazines'
+import NewFilm from './NewFilm.vue';
+import Scan from './Scan.vue';
+import Magazines from './Magazines.vue';
 
 export default {
-    components: {
+  components: {
     Scan,
     NewFilm,
     Magazines,
@@ -22,8 +21,8 @@ export default {
 </script>
 
 <style lang="scss">
-  #app {
+#app {
     text-align: center;
     margin-top: 30px;
-  }
+}
 </style>
