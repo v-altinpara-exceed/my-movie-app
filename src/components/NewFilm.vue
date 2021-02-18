@@ -56,6 +56,7 @@ export default {
       this.movie.genreMovie = '';
       this.movie.posterMovie = null;
       this.movie.movieMovie = null;
+      this.$emit('snack-bar');
     },
 
     close() {

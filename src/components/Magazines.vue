@@ -1,5 +1,22 @@
 <template>
   <div class="container">
+    <v-snackbar
+      v-model="snackbar"
+      absolute
+      color="primary"
+      right
+      top
+      text
+    >
+      Movie delete!!!
+      <v-btn
+        color="pink"
+        text
+        @click="snackbar = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
     <div
       v-for="option in options.filter(e => moviegenre(e))"
       :key="option"
@@ -65,6 +82,7 @@ export default {
 
   data() {
     return {
+      snackbar: false,
       movies: store.state.movies,
       mouseDownMovie: false,
       dragEvent: null,
@@ -82,6 +100,7 @@ export default {
     deleteMovie(id) {
       this.movies = this.movies.filter((t) => t.id !== id);
       store.commit('deleteMovie', this.movies);
+      this.snackbar = true;
     },
     redactMovie(movie) {
       store.commit('redactMovie', movie);

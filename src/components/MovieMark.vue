@@ -1,8 +1,27 @@
 <template>
   <div>
     <Scan />
-    <NewFilm />
+    <NewFilm
+      @snack-bar="snackBar"
+    />
     <Magazines />
+    <v-snackbar
+      v-model="snackbar"
+      absolute
+      color="primary"
+      right
+      top
+      text
+    >
+      Add new film
+      <v-btn
+        color="pink"
+        text
+        @click="snackbar = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
   </div>
 </template>
 
@@ -16,6 +35,16 @@ export default {
     Scan,
     NewFilm,
     Magazines,
+  },
+  data() {
+    return {
+      snackbar: false,
+    };
+  },
+  methods: {
+    snackBar() {
+      this.snackbar = true;
+    },
   },
 };
 </script>
