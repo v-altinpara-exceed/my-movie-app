@@ -2,9 +2,7 @@
   <div>
     <Scan />
     <NewFilm />
-    <Magazines
-      @up="UP"
-    />
+    <Magazines />
   </div>
 </template>
 
@@ -12,19 +10,12 @@
 import NewFilm from './NewFilm.vue';
 import Scan from './Scan.vue';
 import Magazines from './Magazines.vue';
-import store from '../store/store';
 
 export default {
-  store,
   components: {
     Scan,
     NewFilm,
     Magazines,
-  },
-  methods: {
-    UP(option) {
-      store.commit('svapOptions', option);
-    },
   },
 };
 </script>
@@ -33,5 +24,11 @@ export default {
   #app {
     text-align: center;
     margin-top: 30px;
+  }
+  .container {
+    width: 100%;
+    padding: 12px;
+    margin-right: auto;
+    margin-left: auto;
   }
 </style>

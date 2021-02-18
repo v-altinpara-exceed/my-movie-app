@@ -46,7 +46,7 @@ export default new Vuex.Store({
     deleteMovie(state, movies) {
       state.movies = movies;
     },
-    svapOptions(state, option) {
+    upOptions(state, option) {
       let svapflag = true;
       const svapNam1 = state.options.indexOf(option);
       state.svapNam = state.options.indexOf(option);
@@ -68,7 +68,25 @@ export default new Vuex.Store({
           }
         }
       }
-      console.log(state.options);
+    },
+    downOptions(state, option) {
+      let svapflag = true;
+      const svapNam1 = state.options.indexOf(option);
+      state.svapNam = state.options.indexOf(option);
+      console.log(svapNam1);
+      while (svapflag) {
+        if (state.svapNam >= state.options.length) {
+          svapflag = false;
+        } else {
+          state.svapNam += 1;
+          // eslint-disable-next-line max-len
+          if ((state.movies.filter((t) => t.genreMovie === state.options[state.svapNam]).length) > 0) {
+            // eslint-disable-next-line max-len
+            [state.options[svapNam1], state.options[state.svapNam]] = [state.options[state.svapNam], state.options[svapNam1]];
+            svapflag = false;
+          }
+        }
+      }
     },
   },
   strict: true,
