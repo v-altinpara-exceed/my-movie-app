@@ -27,6 +27,7 @@ export default new Vuex.Store({
         posterMovie,
         movieMovie,
       });
+      console.log(state.movies);
     },
     startMovie(state, id) {
       state.movieID = id;
@@ -50,18 +51,13 @@ export default new Vuex.Store({
       let svapflag = true;
       const svapNam1 = state.options.indexOf(option);
       state.svapNam = state.options.indexOf(option);
-      console.log(svapNam1);
       while (svapflag) {
         if (!state.svapNam) {
           svapflag = false;
         } else {
           state.svapNam -= 1;
           // eslint-disable-next-line max-len
-          console.log(state.movies.filter((t) => t.genreMovie === state.options[state.svapNam]).length);
-          // eslint-disable-next-line max-len
           if ((state.movies.filter((t) => t.genreMovie === state.options[state.svapNam]).length) > 0) {
-            console.log(state.svapNam);
-            console.log(state.options);
             // eslint-disable-next-line max-len
             [state.options[svapNam1], state.options[state.svapNam]] = [state.options[state.svapNam], state.options[svapNam1]];
             svapflag = false;
@@ -73,7 +69,6 @@ export default new Vuex.Store({
       let svapflag = true;
       const svapNam1 = state.options.indexOf(option);
       state.svapNam = state.options.indexOf(option);
-      console.log(svapNam1);
       while (svapflag) {
         if (state.svapNam >= state.options.length) {
           svapflag = false;

@@ -84,6 +84,7 @@ export default {
   methods: {
     uploadImage(e) {
       const image = e.target.files[0];
+      console.log('@@@image', image);
       const reader = new FileReader();
       reader.readAsDataURL(image);
       reader.onload = (el) => {

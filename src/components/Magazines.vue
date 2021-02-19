@@ -90,9 +90,6 @@ export default {
       options: store.state.options,
     };
   },
-  updated() {
-    console.log('updated');
-  },
   methods: {
     moviegenre(option) {
       return ((store.state.movies.filter((t) => t.genreMovie === option)).length > 0);

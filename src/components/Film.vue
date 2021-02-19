@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import store from '../store/store';
 
 export default {
   props: {
@@ -27,12 +26,6 @@ export default {
       type: Object,
       required: true,
     },
-  },
-  store,
-  data() {
-    return {
-      movies: {},
-    };
   },
 };
 </script>
