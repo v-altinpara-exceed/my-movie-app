@@ -1,8 +1,5 @@
 <template>
   <div>
-    <div>
-      {{ info }}
-    </div>
     <Scan />
     <NewFilm
       @snack-bar="snackBar"
@@ -29,7 +26,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import NewFilm from './NewFilm.vue';
 import Scan from './Scan.vue';
 import Magazines from './Magazines.vue';
@@ -43,16 +39,7 @@ export default {
   data() {
     return {
       snackbar: false,
-      info: null,
     };
-  },
-  mounted() {
-    axios
-      .get('http://localhost:1234/movie/usersList')
-      .then((usersList) => {
-        this.info = usersList;
-      })
-      .catch((error) => console.log(error));
   },
 
   methods: {

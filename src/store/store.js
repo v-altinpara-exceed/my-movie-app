@@ -15,19 +15,22 @@ export default new Vuex.Store({
   },
 
   mutations: {
+    startpush(state, movie) {
+      state.movies = movie;
+      console.log(state.movies);
+    },
     increment(state, movie) {
       const {
-        nameMovie, descriptionMovie, genreMovie, posterMovie, movieMovie,
+        id, nameMovie, descriptionMovie, genreMovie, posterMovie, movieMovie,
       } = movie;
       state.movies.push({
-        id: state.movies.length ? (state.movies[state.movies.length - 1].id + 1) : 0,
+        id,
         nameMovie,
         descriptionMovie,
         genreMovie,
         posterMovie,
         movieMovie,
       });
-      console.log(state.movies);
     },
     startMovie(state, id) {
       state.movieID = id;

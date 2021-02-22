@@ -72,6 +72,7 @@
 <script>
 import store from '../store/store';
 import Genres from './Genres.vue';
+import PostsService from '../services/PostsService';
 
 export default {
   name: 'ImageUpload',
@@ -90,11 +91,22 @@ export default {
       options: store.state.options,
     };
   },
+
+  mounted() {
+    this.getPosts();
+  },
+
   methods: {
+    async getPosts() {
+      const response = await PostsService.fetchPosts();
+      this.movies = response.data;
+      store.commit('startpush', this.movies);
+    },
     moviegenre(option) {
       return ((store.state.movies.filter((t) => t.genreMovie === option)).length > 0);
     },
     deleteMovie(id) {
+      console.log(id);
       this.movies = this.movies.filter((t) => t.id !== id);
       store.commit('deleteMovie', this.movies);
       this.snackbar = true;

@@ -26,6 +26,7 @@
 <script>
 import store from '../store/store';
 import CreateRedactMovie from './CreateRedactMovie.vue';
+import PostsService from '../services/PostsService';
 
 export default {
   components: {
@@ -35,6 +36,7 @@ export default {
     return {
       movieCreationWindow: false,
       movie: {
+        id: '',
         nameMovie: '',
         descriptionMovie: '',
         genreMovie: '',
@@ -48,14 +50,24 @@ export default {
   store,
 
   methods: {
+    // new movie
+    async newPosts(movie) {
+      await PostsService.newPosts({
+        title: movie.nameMovie,
+        descriptionMovie: movie.descriptionMovie,
+        genreMovie: movie.genreMovie,
+        posterMovie: 'movie.posterMovie',
+      });
+      this.$router.push({ name: 'Movie' });
+    },
+
+    // new movie
+
     redactMovie(movie) {
+      this.movie = movie;
       this.movieCreationWindow = false;
-      store.commit('increment', movie);
-      this.movie.nameMovie = '';
-      this.movie.descriptionMovie = '';
-      this.movie.genreMovie = '';
-      this.movie.posterMovie = null;
-      this.movie.movieMovie = null;
+      this.newPosts(movie);
+      store.commit('increment', this.movie);
       this.$emit('snack-bar');
     },
 
