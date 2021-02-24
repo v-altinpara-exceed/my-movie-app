@@ -92,24 +92,20 @@ export default {
     };
   },
 
-  mounted() {
-    this.getPosts();
-  },
-
   methods: {
-    async getPosts() {
-      const response = await PostsService.fetchPosts();
-      this.movies = response.data;
-      store.commit('startpush', this.movies);
+    async deletePost(id) {
+      await PostsService.deletePost({
+        id,
+      });
+    },
+    deleteMovie(movie) {
+      this.deletePost(String(movie.id));
+      this.movies = this.movies.filter((t) => t.id !== movie.id);
+      store.commit('deleteMovie', this.movies);
+      this.snackbar = true;
     },
     moviegenre(option) {
       return ((store.state.movies.filter((t) => t.genreMovie === option)).length > 0);
-    },
-    deleteMovie(id) {
-      console.log(id);
-      this.movies = this.movies.filter((t) => t.id !== id);
-      store.commit('deleteMovie', this.movies);
-      this.snackbar = true;
     },
     redactMovie(movie) {
       store.commit('redactMovie', movie);

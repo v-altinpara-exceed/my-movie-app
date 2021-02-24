@@ -15,11 +15,8 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    startpush(state, movie) {
-      state.movies = movie;
-      console.log(state.movies);
-    },
     increment(state, movie) {
+      console.log(movie);
       const {
         id, nameMovie, descriptionMovie, genreMovie, posterMovie, movieMovie,
       } = movie;
@@ -32,9 +29,21 @@ export default new Vuex.Store({
         movieMovie,
       });
     },
-    startMovie(state, id) {
-      state.movieID = id;
-      state.movieIDFlag = false;
+    startpush(state, movie) {
+      movie.forEach((elem) => {
+        const {
+          _id, nameMovie, descriptionMovie, genreMovie, posterMovie, movieMovie,
+        } = elem;
+        state.movies.push({
+          id: _id,
+          nameMovie,
+          descriptionMovie,
+          genreMovie,
+          posterMovie,
+          movieMovie,
+        });
+      });
+      console.log(state.movies);
     },
 
     redactMovie(state, movie) {

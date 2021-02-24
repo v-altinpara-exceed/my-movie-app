@@ -7,13 +7,13 @@ export default {
   newPosts(params) {
     return api().post('/movie/create', params);
   },
+  deletePost(params) {
+    return api().delete(`movie/${params.id}/delete`);
+  },
   getPost(params) {
-    return api().get(`posts/${params.id}`);
+    return api().get(`movie/${params.id}`);
   },
   updatePost(params) {
-    return api().put(`posts/${params.id}/update`, params);
-  },
-  deletePost(id) {
-    return api().delete(`posts/${id}/delete`);
+    return api().put(`movie/${params.id}/update`, params);
   },
 };

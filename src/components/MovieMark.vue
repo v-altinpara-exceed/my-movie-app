@@ -29,6 +29,8 @@
 import NewFilm from './NewFilm.vue';
 import Scan from './Scan.vue';
 import Magazines from './Magazines.vue';
+import PostsService from '../services/PostsService';
+import store from '../store/store';
 
 export default {
   components: {
@@ -36,13 +38,21 @@ export default {
     NewFilm,
     Magazines,
   },
+  store,
   data() {
     return {
       snackbar: false,
     };
   },
-
+  mounted() {
+    this.getPosts();
+  },
   methods: {
+    async getPosts() {
+      const response = await PostsService.fetchPosts();
+      this.movies = response.data;
+      store.commit('startpush', this.movies);
+    },
     snackBar() {
       this.snackbar = true;
     },

@@ -52,19 +52,28 @@ export default {
   methods: {
     // new movie
     async newPosts(movie) {
-      await PostsService.newPosts({
-        title: movie.nameMovie,
+      const response = await PostsService.newPosts({
+        nameMovie: movie.nameMovie,
         descriptionMovie: movie.descriptionMovie,
         genreMovie: movie.genreMovie,
-        posterMovie: 'movie.posterMovie',
+        posterMovie: movie.posterMovie,
       });
-      this.$router.push({ name: 'Movie' });
+      const {
+        _id, nameMovie, descriptionMovie, genreMovie, posterMovie,
+      } = response.data;
+      this.movie = {
+        id: _id,
+        nameMovie,
+        descriptionMovie,
+        genreMovie,
+        posterMovie,
+        movieMovie: movie.movieMovie,
+      };
     },
 
     // new movie
 
     redactMovie(movie) {
-      this.movie = movie;
       this.movieCreationWindow = false;
       this.newPosts(movie);
       store.commit('increment', this.movie);
