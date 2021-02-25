@@ -1,45 +1,54 @@
 <template>
   <div>
-    <Scan />
-    <NewFilm
-      @snack-bar="snackBar"
-      @error-serv="errorServ"
+    <v-progress-linear
+      v-if="start"
+      indeterminate
+      color="cyan"
     />
-    <Magazines />
-    <v-snackbar
-      v-model="snackbar"
-      absolute
-      color="primary"
-      right
-      top
-      text
+    <div
+      v-if="!start"
     >
-      Add new film
-      <v-btn
-        color="pink"
+      <Scan />
+      <NewFilm
+        @snack-bar="snackBar"
+        @error-serv="errorServ"
+      />
+      <Magazines />
+      <v-snackbar
+        v-model="snackbar"
+        absolute
+        color="primary"
+        right
+        top
         text
-        @click="snackbar = false"
       >
-        Close
-      </v-btn>
-    </v-snackbar>
-    <v-snackbar
-      v-model="progress"
-      absolute
-      color="primary"
-      right
-      top
-      text
-    >
-      Error
-      <v-btn
-        color="pink"
+        Add new film
+        <v-btn
+          color="pink"
+          text
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </v-snackbar>
+      <v-snackbar
+        v-model="progress"
+        absolute
+        color="primary"
+        right
+        top
         text
-        @click="progress = false"
       >
-        Close
-      </v-btn>
-    </v-snackbar>
+        Error
+        <v-btn
+          color="pink"
+          text
+          @click="progress = false"
+        >
+          Close
+        </v-btn>
+      </v-snackbar>
+    </div>
   </div>
 </template>
 
@@ -59,6 +68,7 @@ export default {
   store,
   data() {
     return {
+      start: true,
       progress: false,
       snackbar: false,
     };
@@ -71,6 +81,7 @@ export default {
       const response = await PostsService.fetchPosts();
       this.movies = response.data;
       store.commit('startpush', this.movies);
+      this.start = false;
     },
     snackBar() {
       this.snackbar = true;
