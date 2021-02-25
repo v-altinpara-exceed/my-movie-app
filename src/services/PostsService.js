@@ -14,6 +14,11 @@ export default {
     return api().get(`movie/${params.id}`);
   },
   updatePost(params) {
-    return api().put(`movie/${params.id}/update`, params);
+    return api().put(`movie/${params.movie.id}/update`, {
+      nameMovie: params.movie.nameMovie,
+      descriptionMovie: params.movie.descriptionMovie,
+      genreMovie: params.movie.genreMovie,
+      posterMovie: params.movie.posterMovie,
+    });
   },
 };

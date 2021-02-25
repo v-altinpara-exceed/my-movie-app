@@ -50,7 +50,6 @@ export default {
   store,
 
   methods: {
-    // new movie
     async newPosts(movie) {
       const response = await PostsService.newPosts({
         nameMovie: movie.nameMovie,
@@ -58,26 +57,20 @@ export default {
         genreMovie: movie.genreMovie,
         posterMovie: movie.posterMovie,
       });
-      const {
-        _id, nameMovie, descriptionMovie, genreMovie, posterMovie,
-      } = response.data;
-      this.movie = {
-        id: _id,
-        nameMovie,
-        descriptionMovie,
-        genreMovie,
-        posterMovie,
-        movieMovie: movie.movieMovie,
-      };
+      const { _id } = response.data;
+      this.movie.id = _id;
+      if (response.status === 200) {
+        this.$emit('snack-bar');
+      } else {
+        this.$emit('error-serv');
+      }
     },
 
-    // new movie
-
     redactMovie(movie) {
-      this.movieCreationWindow = false;
       this.newPosts(movie);
+      this.movie = movie;
+      this.movieCreationWindow = false;
       store.commit('increment', this.movie);
-      this.$emit('snack-bar');
     },
 
     close() {

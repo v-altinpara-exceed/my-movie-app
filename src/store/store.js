@@ -16,7 +16,6 @@ export default new Vuex.Store({
 
   mutations: {
     increment(state, movie) {
-      console.log(movie);
       const {
         id, nameMovie, descriptionMovie, genreMovie, posterMovie, movieMovie,
       } = movie;
@@ -43,7 +42,6 @@ export default new Vuex.Store({
           movieMovie,
         });
       });
-      console.log(state.movies);
     },
 
     redactMovie(state, movie) {

@@ -1,4 +1,7 @@
 # my-app
+```
+My cinema
+```
 
 ## Project setup
 ```

@@ -98,6 +98,11 @@ export default {
         id,
       });
     },
+    async updatePost(movie) {
+      await PostsService.updatePost({
+        movie,
+      });
+    },
     deleteMovie(movie) {
       this.deletePost(String(movie.id));
       this.movies = this.movies.filter((t) => t.id !== movie.id);
@@ -108,6 +113,7 @@ export default {
       return ((store.state.movies.filter((t) => t.genreMovie === option)).length > 0);
     },
     redactMovie(movie) {
+      this.updatePost(movie);
       store.commit('redactMovie', movie);
     },
     down(option) {

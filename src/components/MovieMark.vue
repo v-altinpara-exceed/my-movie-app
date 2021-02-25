@@ -3,6 +3,7 @@
     <Scan />
     <NewFilm
       @snack-bar="snackBar"
+      @error-serv="errorServ"
     />
     <Magazines />
     <v-snackbar
@@ -18,6 +19,23 @@
         color="pink"
         text
         @click="snackbar = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
+    <v-snackbar
+      v-model="progress"
+      absolute
+      color="primary"
+      right
+      top
+      text
+    >
+      Error
+      <v-btn
+        color="pink"
+        text
+        @click="progress = false"
       >
         Close
       </v-btn>
@@ -41,6 +59,7 @@ export default {
   store,
   data() {
     return {
+      progress: false,
       snackbar: false,
     };
   },
@@ -55,6 +74,9 @@ export default {
     },
     snackBar() {
       this.snackbar = true;
+    },
+    errorServ() {
+      this.progress = true;
     },
   },
 };
